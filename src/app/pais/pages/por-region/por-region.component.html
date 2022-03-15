@@ -1,0 +1,39 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h3>Buscar por región <small> {{ regionActiva | titlecase }} </small></h3>
+    <hr>
+
+    <h5>Seleccione la región</h5>
+
+    <!-- 
+
+        Inicialmente: class="btn btn-outline-primary" pero surge la necesidad de tener unas clases u otras segun condición,
+        [class.btn-primary]="region === regionActiva" 
+
+        [ngClass]="{
+                        'btn-primary': regionActiva === region,
+                        'btn-outline-primary': regionActiva !== region
+                    }"
+        
+        [class] = "evaluación javascript" La más eficiente
+        [class]="(region === regionActiva) ? 'btn btn-primary': 'btn btn-outline-primary' " 
+
+        Cuando se lo lleva a una función:
+        [class]="getClaseCSS( region )" 
+    -->
+
+    <div class="row">
+        <div class="col">
+            <button *ngFor="let region of regiones" 
+                    [class]="getClaseCSS( region )" 
+                    (click)="activarRegion( region )">
+                {{ region | titlecase }}
+            </button>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="paises.length > 0" class="row">
+    <div class="col">
+        <app-pais-tabla [paises]="paises"></app-pais-tabla> 
+    </div>
+</div>
